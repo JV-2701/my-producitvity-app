@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>Jatin's Workspace</title>
+  <meta name="application-name" content="Jatin's Workspace"/>
+  <meta name="apple-mobile-web-app-title" content="Jatin's Workspace"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="theme-color" content="#0f172a"/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwZjE3MmEiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWUzYTVmIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjEyMCIgZmlsbD0idXJsKCNnKSIvPgogIDx0ZXh0IHg9IjI1NiIgeT0iMzEwIiBmb250LWZhbWlseT0iR2VvcmdpYSwgc2VyaWYiIGZvbnQtc2l6ZT0iMjIwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzM0ZDM5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SlM8L3RleHQ+CiAgPHRleHQgeD0iMjU2IiB5PSI0MjAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSI1MiIgZmlsbD0iIzk0YTNiOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjYiPkpBVElOPC90ZXh0Pgo8L3N2Zz4="/>
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwZjE3MmEiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWUzYTVmIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjEyMCIgZmlsbD0idXJsKCNnKSIvPgogIDx0ZXh0IHg9IjI1NiIgeT0iMzEwIiBmb250LWZhbWlseT0iR2VvcmdpYSwgc2VyaWYiIGZvbnQtc2l6ZT0iMjIwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzM0ZDM5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SlM8L3RleHQ+CiAgPHRleHQgeD0iMjU2IiB5PSI0MjAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSI1MiIgZmlsbD0iIzk0YTNiOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjYiPkpBVElOPC90ZXh0Pgo8L3N2Zz4="/>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'DM Sans','Segoe UI',sans-serif;background:#f1f5f9;color:#1e293b;-webkit-tap-highlight-color:transparent;}
+    input,select,button{font-family:inherit;}
+    input:focus,select:focus{outline:none;border-color:#3b82f6!important;}
+    /* Calendar */
+    .cd{width:14.28%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:13px;cursor:pointer;font-weight:500;transition:background 0.15s;}
+    .cd:hover{background:#e2e8f0;}
+    .cd.has{background:#d1fae5;color:#065f46;font-weight:700;}
+    .cd.sel{background:#0f172a!important;color:#fff!important;}
+    .cd.tod{border:2px solid #10b981;}
+    /* Modal */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:100;display:flex;align-items:flex-end;justify-content:center;}
+    .modal-sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:480px;max-height:85vh;overflow-y:auto;padding:0 0 40px;}
+    .modal-handle{width:40px;height:4px;background:#e2e8f0;border-radius:99px;margin:12px auto 0;}
+    /* KPI card hover */
+    .kpi-card{cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;}
+    .kpi-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.12)!important;}
+    .kpi-card:active{transform:scale(0.97);}
+    /* Section divider */
+    .sec-title{font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;display:block;}
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { useState, useMemo } = React;
+  const SK = "prodapp_v2";
+  const CATS = ["Work","Personal","Health","Learning","Other"];
+  const PERIODS = ["Today","This Week","This Month"];
+  const CAT_COLORS = {Work:"#3b82f6",Personal:"#8b5cf6",Health:"#10b981",Learning:"#f59e0b",Other:"#64748b"};
+  const CAT_BG = {Work:"#dbeafe",Personal:"#ede9fe",Health:"#d1fae5",Learning:"#fef3c7",Other:"#f1f5f9"};
+
+  const load = () => { try{return JSON.parse(localStorage.getItem(SK))||{tasks:[],finances:[],reminders:[]};}catch{return{tasks:[],finances:[],reminders:[]};} };
+  const save = d => localStorage.setItem(SK, JSON.stringify(d));
+  const pad = n => String(n).padStart(2,"0");
+  const todayStr = () => new Date().toISOString().split("T")[0];
+
+  /* ── SHARED COMPONENTS ─────────────────────────────── */
+  function Ring({pct, size=72, color="#10b981", strokeW=7}) {
+    const r=(size-strokeW)/2, c=2*Math.PI*r, off=c-(pct/100)*c;
+    return <svg width={size} height={size} style={{transform:"rotate(-90deg)"}}>
+      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#e2e8f0" strokeWidth={strokeW}/>
+      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke={color} strokeWidth={strokeW}
+        strokeDasharray={c} strokeDashoffset={off} strokeLinecap="round"
+        style={{transition:"stroke-dashoffset 0.5s ease"}}/>
+    </svg>;
+  }
+
+  function CatBadge({cat}) {
+    return <span style={{fontSize:11,fontWeight:600,padding:"2px 8px",borderRadius:999,
+      background:CAT_BG[cat]||"#f1f5f9",color:CAT_COLORS[cat]||"#64748b"}}>{cat}</span>;
+  }
+
+  function Divider() { return <div style={{height:1,background:"#f1f5f9",margin:"4px 0"}}/>; }
+
+  /* ── MODAL BOTTOM SHEET ────────────────────────────── */
+  function Modal({title, onClose, children, accentColor="#0f172a"}) {
+    return <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-sheet" onClick={e=>e.stopPropagation()}>
+        <div className="modal-handle"/>
+        <div style={{padding:"16px 20px 0",display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:"1px solid #f1f5f9",paddingBottom:14,marginBottom:4}}>
+          <div style={{fontWeight:700,fontSize:17,color:accentColor}}>{title}</div>
+          <button onClick={onClose} style={{background:"#f1f5f9",border:"none",borderRadius:"50%",width:32,height:32,cursor:"pointer",fontSize:18,color:"#64748b",display:"flex",alignItems:"center",justifyContent:"center"}}>×</button>
+        </div>
+        <div style={{padding:"12px 20px"}}>{children}</div>
+      </div>
+    </div>;
+  }
+
+  /* ── TASK ROW ──────────────────────────────────────── */
+  function TaskRow({t, onToggle, onDelete}) {
+    return <div style={{background:"#fff",borderRadius:14,padding:"12px 14px",marginBottom:8,
+      boxShadow:"0 1px 3px rgba(0,0,0,0.06)",display:"flex",alignItems:"center",gap:12,
+      opacity:t.done?0.65:1,transition:"opacity 0.2s"}}>
+      <button onClick={()=>onToggle(t.id)} style={{width:26,height:26,borderRadius:"50%",flexShrink:0,cursor:"pointer",
+        border:`2px solid ${t.done?"#10b981":"#cbd5e1"}`,background:t.done?"#10b981":"#fff",
+        display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.2s"}}>
+        {t.done&&<span style={{color:"#fff",fontSize:13,lineHeight:1}}>✓</span>}
+      </button>
+      <div style={{flex:1,minWidth:0}}>
+        <div style={{fontSize:14,fontWeight:600,textDecoration:t.done?"line-through":"none",
+          color:t.done?"#94a3b8":"#1e293b",marginBottom:4,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{t.title}</div>
+        <CatBadge cat={t.cat}/>
+      </div>
+      <button onClick={()=>onDelete(t.id)} style={{background:"none",border:"none",color:"#cbd5e1",cursor:"pointer",fontSize:22,padding:0,flexShrink:0,lineHeight:1}}>×</button>
+    </div>;
+  }
+
+  /* ── REMINDER ROW ──────────────────────────────────── */
+  function RemRow({r, onToggle, onDelete}) {
+    const today = todayStr();
+    const isOverdue = !r.done && r.date < today;
+    return <div style={{background:"#fff",borderRadius:14,padding:"12px 14px",marginBottom:8,
+      boxShadow:"0 1px 3px rgba(0,0,0,0.06)",display:"flex",alignItems:"center",gap:12,
+      opacity:r.done?0.5:1,borderLeft:isOverdue?"3px solid #ef4444":"3px solid transparent"}}>
+      <button onClick={()=>onToggle(r.id)} style={{width:26,height:26,borderRadius:"50%",flexShrink:0,cursor:"pointer",
+        border:`2px solid ${r.done?"#10b981":isOverdue?"#ef4444":"#cbd5e1"}`,background:r.done?"#10b981":"#fff",
+        display:"flex",alignItems:"center",justifyContent:"center"}}>
+        {r.done&&<span style={{color:"#fff",fontSize:13,lineHeight:1}}>✓</span>}
+      </button>
+      <div style={{flex:1,minWidth:0}}>
+        <div style={{fontSize:14,fontWeight:600,textDecoration:r.done?"line-through":"none",
+          color:r.done?"#94a3b8":"#1e293b",marginBottom:2,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{r.title}</div>
+        <div style={{fontSize:11,color:isOverdue?"#ef4444":"#94a3b8"}}>
+          {r.date}{r.time&&` · ${r.time}`}{isOverdue&&" · Overdue"}
+        </div>
+      </div>
+      <button onClick={()=>onDelete(r.id)} style={{background:"none",border:"none",color:"#cbd5e1",cursor:"pointer",fontSize:22,padding:0,flexShrink:0,lineHeight:1}}>×</button>
+    </div>;
+  }
+
+  /* ── FINANCE ROW ───────────────────────────────────── */
+  function FinRow({f, onDelete}) {
+    return <div style={{background:"#fff",borderRadius:14,padding:"12px 14px",marginBottom:8,
+      boxShadow:"0 1px 3px rgba(0,0,0,0.06)",display:"flex",alignItems:"center",gap:12}}>
+      <div style={{width:38,height:38,borderRadius:12,flexShrink:0,
+        background:f.type==="income"?"#ecfdf5":"#fef2f2",
+        display:"flex",alignItems:"center",justifyContent:"center",fontSize:18}}>
+        {f.type==="income"?"↑":"↓"}
+      </div>
+      <div style={{flex:1,minWidth:0}}>
+        <div style={{fontSize:14,fontWeight:600,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{f.desc}</div>
+        <div style={{fontSize:11,color:"#94a3b8"}}>{new Date(f.date).toLocaleDateString("en-IN")}</div>
+      </div>
+      <div style={{fontWeight:700,fontSize:14,color:f.type==="income"?"#10b981":"#ef4444",flexShrink:0}}>
+        {f.type==="income"?"+":"-"}₹{f.amount.toLocaleString("en-IN")}
+      </div>
+      <button onClick={()=>onDelete(f.id)} style={{background:"none",border:"none",color:"#cbd5e1",cursor:"pointer",fontSize:22,padding:0,flexShrink:0,lineHeight:1}}>×</button>
+    </div>;
+  }
+
+  /* ── CALENDAR ──────────────────────────────────────── */
+  function CalView({data}) {
+    const now = new Date(), tStr = now.toISOString().split("T")[0];
+    const [yr,setYr] = useState(now.getFullYear());
+    const [mo,setMo] = useState(now.getMonth());
+    const [sel,setSel] = useState(null);
+
+    const active = useMemo(()=>{
+      const s=new Set();
+      data.tasks.filter(t=>t.completedAt).forEach(t=>s.add(t.completedAt.split("T")[0]));
+      data.tasks.forEach(t=>s.add(new Date(t.id).toISOString().split("T")[0]));
+      data.finances.forEach(f=>s.add(f.date.split("T")[0]));
+      data.reminders.forEach(r=>s.add(r.date));
+      return s;
+    },[data]);
+
+    const first=new Date(yr,mo,1).getDay(), days=new Date(yr,mo+1,0).getDate();
+    const mname=new Date(yr,mo).toLocaleString("en-IN",{month:"long",year:"numeric"});
+    const prev=()=>{mo===0?(setMo(11),setYr(y=>y-1)):setMo(m=>m-1);setSel(null);};
+    const next=()=>{mo===11?(setMo(0),setYr(y=>y+1)):setMo(m=>m+1);setSel(null);};
+    const ds=d=>`${yr}-${pad(mo+1)}-${pad(d)}`;
+
+    const selTasks = sel?data.tasks.filter(t=>{
+      const cd=new Date(t.id).toISOString().split("T")[0];
+      const done=t.completedAt?.split("T")[0];
+      return cd===sel||done===sel;
+    }):[];
+    const selFin=sel?data.finances.filter(f=>f.date.split("T")[0]===sel):[];
+    const selRem=sel?data.reminders.filter(r=>r.date===sel):[];
+
+    return <div>
+      {/* Calendar card */}
+      <div style={{background:"#fff",borderRadius:20,padding:20,marginBottom:16,boxShadow:"0 2px 8px rgba(0,0,0,0.06)"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}>
+          <button onClick={prev} style={{background:"#f1f5f9",border:"none",borderRadius:10,padding:"6px 12px",cursor:"pointer",fontSize:18,color:"#475569"}}>‹</button>
+          <div style={{fontWeight:700,fontSize:15,color:"#1e293b"}}>{mname}</div>
+          <button onClick={next} style={{background:"#f1f5f9",border:"none",borderRadius:10,padding:"6px 12px",cursor:"pointer",fontSize:18,color:"#475569"}}>›</button>
+        </div>
+        <div style={{display:"flex",marginBottom:8}}>
+          {["Su","Mo","Tu","We","Th","Fr","Sa"].map(d=><div key={d} style={{width:"14.28%",textAlign:"center",fontSize:11,fontWeight:700,color:"#94a3b8",padding:"2px 0"}}>{d}</div>)}
+        </div>
+        <div style={{display:"flex",flexWrap:"wrap",gap:"2px 0"}}>
+          {Array(first).fill(null).map((_,i)=><div key={"x"+i} style={{width:"14.28%"}}/>)}
+          {Array(days).fill(null).map((_,i)=>{
+            const d=i+1, s=ds(d);
+            let cls="cd";
+            if(active.has(s)) cls+=" has";
+            if(s===sel) cls+=" sel";
+            if(s===tStr) cls+=" tod";
+            return <div key={d} className={cls} onClick={()=>setSel(s===sel?null:s)}>{d}</div>;
+          })}
+        </div>
+        <div style={{marginTop:14,display:"flex",gap:16,fontSize:11,color:"#94a3b8",paddingTop:10,borderTop:"1px solid #f1f5f9"}}>
+          <span style={{display:"flex",alignItems:"center",gap:5}}><span style={{width:10,height:10,borderRadius:3,background:"#d1fae5",display:"inline-block"}}/>Activity</span>
+          <span style={{display:"flex",alignItems:"center",gap:5}}><span style={{width:10,height:10,borderRadius:3,border:"2px solid #10b981",display:"inline-block"}}/>Today</span>
+          <span style={{display:"flex",alignItems:"center",gap:5}}><span style={{width:10,height:10,borderRadius:3,background:"#0f172a",display:"inline-block"}}/>Selected</span>
+        </div>
+      </div>
+
+      {/* Selected date breakdown */}
+      {sel&&<div style={{background:"#fff",borderRadius:20,padding:20,boxShadow:"0 2px 8px rgba(0,0,0,0.06)"}}>
+        <div style={{fontWeight:700,fontSize:15,marginBottom:16,color:"#0f172a"}}>
+          📅 {new Date(sel+"T12:00:00").toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"})}
+        </div>
+        {selTasks.length>0&&<div style={{marginBottom:16}}>
+          <span className="sec-title">Tasks ({selTasks.length})</span>
+          {selTasks.map(t=><div key={t.id} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0",borderBottom:"1px solid #f8fafc"}}>
+            <span style={{fontSize:16,flexShrink:0}}>{t.done?"✅":"⬜"}</span>
+            <span style={{flex:1,fontSize:13,fontWeight:500,color:t.done?"#94a3b8":"#1e293b",textDecoration:t.done?"line-through":"none"}}>{t.title}</span>
+            <CatBadge cat={t.cat}/>
+          </div>)}
+        </div>}
+        {selFin.length>0&&<div style={{marginBottom:16}}>
+          <span className="sec-title">Finance ({selFin.length})</span>
+          {selFin.map(f=><div key={f.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"8px 0",borderBottom:"1px solid #f8fafc",fontSize:13}}>
+            <span style={{fontWeight:500}}>{f.desc}</span>
+            <span style={{fontWeight:700,color:f.type==="income"?"#10b981":"#ef4444"}}>{f.type==="income"?"+":"-"}₹{f.amount.toLocaleString("en-IN")}</span>
+          </div>)}
+        </div>}
+        {selRem.length>0&&<div>
+          <span className="sec-title">Reminders ({selRem.length})</span>
+          {selRem.map(r=><div key={r.id} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0",fontSize:13,borderBottom:"1px solid #f8fafc"}}>
+            <span>{r.done?"✅":"🔔"}</span>
+            <span style={{flex:1,color:r.done?"#94a3b8":"#1e293b"}}>{r.title}</span>
+            {r.time&&<span style={{color:"#94a3b8",fontSize:11}}>{r.time}</span>}
+          </div>)}
+        </div>}
+        {!selTasks.length&&!selFin.length&&!selRem.length&&
+          <div style={{textAlign:"center",color:"#94a3b8",padding:"24px 0",fontSize:13}}>Nothing recorded on this day.</div>}
+      </div>}
+    </div>;
+  }
+
+  /* ── PERIOD DETAIL VIEW ────────────────────────────── */
+  function PeriodDetail({data, p}) {
+    const now=new Date(), tStr=now.toISOString().split("T")[0];
+    const tasks=data.tasks.filter(t=>t.period===p);
+    const done=tasks.filter(t=>t.done);
+    const pct=tasks.length?Math.round(done.length/tasks.length*100):0;
+    const colors={"Today":"#10b981","This Week":"#3b82f6","This Month":"#8b5cf6"};
+    const color=colors[p]||"#10b981";
+
+    const fins=data.finances.filter(f=>{
+      if(p==="Today") return f.date.split("T")[0]===tStr;
+      if(p==="This Week"){const s=new Date(now);s.setDate(now.getDate()-now.getDay());s.setHours(0,0,0,0);return new Date(f.date)>=s;}
+      const d=new Date(f.date);return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();
+    });
+    const inc=fins.filter(f=>f.type==="income").reduce((s,f)=>s+f.amount,0);
+    const exp=fins.filter(f=>f.type==="expense").reduce((s,f)=>s+f.amount,0);
+
+    return <div>
+      {/* Ring + stats */}
+      <div style={{display:"flex",alignItems:"center",gap:20,padding:"12px 0 16px",borderBottom:"1px solid #f1f5f9",marginBottom:16}}>
+        <div style={{position:"relative",display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+          <Ring pct={pct} size={80} color={color} strokeW={7}/>
+          <div style={{position:"absolute",fontSize:15,fontWeight:800,color}}>{pct}%</div>
+        </div>
+        <div style={{flex:1}}>
+          <div style={{display:"flex",justifyContent:"space-between",fontSize:13,marginBottom:6}}>
+            <span style={{color:"#64748b"}}>Total tasks</span><span style={{fontWeight:700}}>{tasks.length}</span>
+          </div>
+          <div style={{display:"flex",justifyContent:"space-between",fontSize:13,marginBottom:6}}>
+            <span style={{color:"#10b981"}}>✅ Completed</span><span style={{fontWeight:700,color:"#10b981"}}>{done.length}</span>
+          </div>
+          <div style={{display:"flex",justifyContent:"space-between",fontSize:13}}>
+            <span style={{color:"#f59e0b"}}>⏳ Pending</span><span style={{fontWeight:700,color:"#f59e0b"}}>{tasks.filter(t=>!t.done).length}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* By category */}
+      {tasks.length>0&&<div style={{marginBottom:16}}>
+        <span className="sec-title">By Category</span>
+        {CATS.map(cat=>{
+          const ct=tasks.filter(t=>t.cat===cat); if(!ct.length)return null;
+          const cd=ct.filter(t=>t.done).length, cp=ct.length?Math.round(cd/ct.length*100):0;
+          return <div key={cat} style={{marginBottom:12}}>
+            <div style={{display:"flex",justifyContent:"space-between",fontSize:13,marginBottom:5}}>
+              <span style={{fontWeight:600,color:CAT_COLORS[cat]||"#64748b"}}>{cat}</span>
+              <span style={{color:"#94a3b8"}}>{cd}/{ct.length} done</span>
+            </div>
+            <div style={{height:6,background:"#f1f5f9",borderRadius:99,overflow:"hidden"}}>
+              <div style={{height:"100%",width:`${cp}%`,background:CAT_COLORS[cat]||color,borderRadius:99,transition:"width 0.4s"}}/>
+            </div>
+          </div>;
+        })}
+      </div>}
+
+      {/* Finance summary */}
+      {fins.length>0&&<div style={{marginBottom:16}}>
+        <span className="sec-title">Finance ({p})</span>
+        <div style={{display:"flex",gap:10,marginBottom:10}}>
+          <div style={{flex:1,background:"#ecfdf5",borderRadius:14,padding:"10px 12px"}}>
+            <div style={{fontSize:10,color:"#10b981",fontWeight:700}}>INCOME</div>
+            <div style={{fontSize:17,fontWeight:800,color:"#065f46"}}>₹{inc.toLocaleString("en-IN")}</div>
+          </div>
+          <div style={{flex:1,background:"#fef2f2",borderRadius:14,padding:"10px 12px"}}>
+            <div style={{fontSize:10,color:"#ef4444",fontWeight:700}}>EXPENSE</div>
+            <div style={{fontSize:17,fontWeight:800,color:"#991b1b"}}>₹{exp.toLocaleString("en-IN")}</div>
+          </div>
+        </div>
+      </div>}
+
+      {/* Completed list */}
+      {done.length>0&&<div>
+        <span className="sec-title">Completed Tasks</span>
+        {done.map(t=><div key={t.id} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0",borderBottom:"1px solid #f8fafc",fontSize:13}}>
+          <span>✅</span>
+          <span style={{flex:1,color:"#94a3b8",textDecoration:"line-through"}}>{t.title}</span>
+          <CatBadge cat={t.cat}/>
+        </div>)}
+      </div>}
+
+      {!tasks.length&&<div style={{textAlign:"center",color:"#94a3b8",padding:"24px 0",fontSize:13}}>No tasks for {p.toLowerCase()} yet.</div>}
+    </div>;
+  }
+
+  /* ── MAIN APP ──────────────────────────────────────── */
+  function App() {
+    const [data,setData]=useState(load);
+    const [tab,setTab]=useState("dashboard");
+    const [dtab,setDtab]=useState("overview");
+    const [modal,setModal]=useState(null); // {type: "tasks_period"|"finance"|"reminders"|"balance", payload}
+
+    // Task form
+    const [tTitle,setTTitle]=useState("");
+    const [tCat,setTCat]=useState("Work");
+    const [tPeriod,setTPeriod]=useState("Today");
+    // Finance form
+    const [fDesc,setFDesc]=useState("");
+    const [fAmt,setFAmt]=useState("");
+    const [fType,setFType]=useState("expense");
+    // Reminder form
+    const [rTitle,setRTitle]=useState("");
+    const [rDate,setRDate]=useState("");
+    const [rTime,setRTime]=useState("");
+
+    const persist=next=>{setData(next);save(next);};
+
+    const addTask=()=>{if(!tTitle.trim())return;persist({...data,tasks:[...data.tasks,{id:Date.now(),title:tTitle,cat:tCat,period:tPeriod,done:false,completedAt:null}]});setTTitle("");};
+    const toggleTask=id=>persist({...data,tasks:data.tasks.map(t=>t.id===id?{...t,done:!t.done,completedAt:!t.done?new Date().toISOString():null}:t)});
+    const deleteTask=id=>persist({...data,tasks:data.tasks.filter(t=>t.id!==id)});
+
+    const addFin=()=>{if(!fDesc.trim()||!fAmt)return;persist({...data,finances:[...data.finances,{id:Date.now(),desc:fDesc,amount:parseFloat(fAmt),type:fType,date:new Date().toISOString()}]});setFDesc("");setFAmt("");};
+    const delFin=id=>persist({...data,finances:data.finances.filter(f=>f.id!==id)});
+
+    const addRem=()=>{if(!rTitle.trim()||!rDate)return;persist({...data,reminders:[...data.reminders,{id:Date.now(),title:rTitle,date:rDate,time:rTime,done:false}]});setRTitle("");setRDate("");setRTime("");};
+    const togRem=id=>persist({...data,reminders:data.reminders.map(r=>r.id===id?{...r,done:!r.done}:r)});
+    const delRem=id=>persist({...data,reminders:data.reminders.filter(r=>r.id!==id)});
+
+    const tP=p=>data.tasks.filter(t=>t.period===p);
+    const pct=p=>{const ts=tP(p);return ts.length?Math.round(ts.filter(t=>t.done).length/ts.length*100):0;};
+    const inc=data.finances.filter(f=>f.type==="income").reduce((s,f)=>s+f.amount,0);
+    const exp=data.finances.filter(f=>f.type==="expense").reduce((s,f)=>s+f.amount,0);
+    const bal=inc-exp;
+    const tStr=todayStr();
+    const upcoming=data.reminders.filter(r=>!r.done).sort((a,b)=>new Date(a.date+"T"+(a.time||"00:00"))-new Date(b.date+"T"+(b.time||"00:00")));
+    const overdue=upcoming.filter(r=>r.date<tStr);
+    const todayRem=upcoming.filter(r=>r.date===tStr);
+
+    // Style constants
+    const CARD={background:"#fff",borderRadius:20,padding:20,marginBottom:16,boxShadow:"0 2px 8px rgba(0,0,0,0.06)"};
+    const INP={width:"100%",padding:"11px 14px",borderRadius:12,border:"2px solid #e2e8f0",fontSize:14,marginBottom:10,display:"block",background:"#fff"};
+    const BTN={width:"100%",padding:13,borderRadius:12,border:"none",background:"linear-gradient(135deg,#0f172a,#1e3a5f)",color:"#fff",fontSize:14,fontWeight:700,cursor:"pointer",letterSpacing:0.3};
+    const SEL={padding:"9px 12px",borderRadius:12,border:"2px solid #e2e8f0",fontSize:13,background:"#fff",cursor:"pointer"};
+
+    const navTabs=[{id:"dashboard",icon:"⊞",label:"Home"},{id:"tasks",icon:"✓",label:"Tasks"},{id:"finance",icon:"₹",label:"Finance"},{id:"reminders",icon:"🔔",label:"Remind"}];
+    const dTabs=[{id:"overview",label:"Overview"},{id:"daily",label:"Daily"},{id:"weekly",label:"Weekly"},{id:"monthly",label:"Monthly"},{id:"calendar",label:"📅 History"}];
+    const periodColors={"Today":"#10b981","This Week":"#3b82f6","This Month":"#8b5cf6"};
+
+    return <div style={{minHeight:"100vh",background:"#f1f5f9",paddingBottom:20}}>
+
+      {/* ── MODALS ── */}
+      {modal&&modal.type==="tasks_period"&&<Modal
+        title={`${modal.payload} — Tasks`}
+        accentColor={periodColors[modal.payload]||"#0f172a"}
+        onClose={()=>setModal(null)}>
+        <PeriodDetail data={data} p={modal.payload}/>
+      </Modal>}
+
+      {modal&&modal.type==="finance"&&<Modal title="Finance Details" accentColor="#3b82f6" onClose={()=>setModal(null)}>
+        <div style={{display:"flex",gap:10,marginBottom:16}}>
+          <div style={{flex:1,background:"#ecfdf5",borderRadius:14,padding:"14px"}}>
+            <div style={{fontSize:10,fontWeight:700,color:"#10b981",marginBottom:4}}>TOTAL INCOME</div>
+            <div style={{fontSize:22,fontWeight:800,color:"#065f46"}}>₹{inc.toLocaleString("en-IN")}</div>
+          </div>
+          <div style={{flex:1,background:"#fef2f2",borderRadius:14,padding:"14px"}}>
+            <div style={{fontSize:10,fontWeight:700,color:"#ef4444",marginBottom:4}}>TOTAL EXPENSE</div>
+            <div style={{fontSize:22,fontWeight:800,color:"#991b1b"}}>₹{exp.toLocaleString("en-IN")}</div>
+          </div>
+        </div>
+        <div style={{background:bal>=0?"#eff6ff":"#fef2f2",borderRadius:14,padding:"14px",marginBottom:16}}>
+          <div style={{fontSize:10,fontWeight:700,color:bal>=0?"#3b82f6":"#ef4444",marginBottom:4}}>NET BALANCE</div>
+          <div style={{fontSize:24,fontWeight:800,color:bal>=0?"#1d4ed8":"#991b1b"}}>₹{Math.abs(bal).toLocaleString("en-IN")} {bal<0?"↓":"↑"}</div>
+        </div>
+        <span className="sec-title">All Transactions ({data.finances.length})</span>
+        {[...data.finances].reverse().map(f=><FinRow key={f.id} f={f} onDelete={delFin}/>)}
+        {!data.finances.length&&<div style={{textAlign:"center",color:"#94a3b8",padding:"20px 0",fontSize:13}}>No transactions yet.</div>}
+      </Modal>}
+
+      {modal&&modal.type==="reminders"&&<Modal title="Reminders" accentColor="#f59e0b" onClose={()=>setModal(null)}>
+        {overdue.length>0&&<div style={{marginBottom:16}}>
+          <span className="sec-title" style={{color:"#ef4444"}}>⚠️ Overdue ({overdue.length})</span>
+          {overdue.map(r=><RemRow key={r.id} r={r} onToggle={togRem} onDelete={delRem}/>)}
+        </div>}
+        {todayRem.length>0&&<div style={{marginBottom:16}}>
+          <span className="sec-title">Today ({todayRem.length})</span>
+          {todayRem.map(r=><RemRow key={r.id} r={r} onToggle={togRem} onDelete={delRem}/>)}
+        </div>}
+        {upcoming.filter(r=>r.date>tStr).length>0&&<div style={{marginBottom:16}}>
+          <span className="sec-title">Upcoming</span>
+          {upcoming.filter(r=>r.date>tStr).map(r=><RemRow key={r.id} r={r} onToggle={togRem} onDelete={delRem}/>)}
+        </div>}
+        {data.reminders.filter(r=>r.done).length>0&&<div>
+          <span className="sec-title">Completed</span>
+          {data.reminders.filter(r=>r.done).map(r=><RemRow key={r.id} r={r} onToggle={togRem} onDelete={delRem}/>)}
+        </div>}
+        {!data.reminders.length&&<div style={{textAlign:"center",color:"#94a3b8",padding:"20px 0",fontSize:13}}>No reminders yet.</div>}
+      </Modal>}
+
+      {/* ── HEADER ── */}
+      <div style={{background:"linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%)",padding:"20px 20px 0",color:"#fff"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:18}}>
+          <div>
+            <div style={{fontSize:10,letterSpacing:2.5,color:"#64748b",textTransform:"uppercase",fontWeight:700,marginBottom:4}}>Jatin's Workspace</div>
+            <div style={{fontSize:17,fontWeight:700,color:"#e2e8f0"}}>{new Date().toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"short"})}</div>
+          </div>
+          <div style={{textAlign:"right",background:"rgba(255,255,255,0.08)",borderRadius:14,padding:"8px 14px"}}>
+            <div style={{fontSize:10,color:"#64748b",marginBottom:2}}>Done Today</div>
+            <div style={{fontSize:26,fontWeight:800,color:"#34d399",lineHeight:1}}>
+              {data.tasks.filter(t=>t.period==="Today"&&t.done).length}
+              <span style={{fontSize:13,color:"#475569",fontWeight:500}}>/{tP("Today").length}</span>
+            </div>
+          </div>
+        </div>
+        {/* Nav */}
+        <div style={{display:"flex"}}>
+          {navTabs.map(t=><button key={t.id} onClick={()=>setTab(t.id)} style={{flex:1,padding:"10px 2px 13px",border:"none",cursor:"pointer",background:"transparent",color:tab===t.id?"#fff":"#475569",borderBottom:tab===t.id?"3px solid #34d399":"3px solid transparent",fontSize:11,fontWeight:700,letterSpacing:0.3,transition:"color 0.2s"}}>
+            <div style={{fontSize:17,marginBottom:2}}>{t.icon}</div>{t.label}
+          </button>)}
+        </div>
+      </div>
+
+      {/* ── CONTENT ── */}
+      <div style={{padding:"16px 16px 0",maxWidth:480,margin:"0 auto"}}>
+
+        {/* ──── DASHBOARD ──── */}
+        {tab==="dashboard"&&<div>
+          {/* Sub-tab pills */}
+          <div style={{display:"flex",gap:8,marginBottom:18,overflowX:"auto",paddingBottom:2}}>
+            {dTabs.map(dt=><button key={dt.id} onClick={()=>setDtab(dt.id)}
+              style={{flexShrink:0,padding:"7px 16px",borderRadius:99,border:"none",cursor:"pointer",
+                background:dtab===dt.id?"#0f172a":"#fff",
+                color:dtab===dt.id?"#fff":"#64748b",
+                fontSize:12,fontWeight:700,boxShadow:dtab===dt.id?"0 2px 8px rgba(0,0,0,0.15)":"0 1px 3px rgba(0,0,0,0.06)",
+                transition:"all 0.2s"}}>
+              {dt.label}
+            </button>)}
+          </div>
+
+          {/* OVERVIEW */}
+          {dtab==="overview"&&<div>
+            {/* Task progress rings — clickable */}
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:10,marginBottom:16}}>
+              {[["Today","#10b981","Day"],["This Week","#3b82f6","Week"],["This Month","#8b5cf6","Month"]].map(([p,c,short])=>(
+                <div key={p} className="kpi-card" onClick={()=>setModal({type:"tasks_period",payload:p})}
+                  style={{background:"#fff",borderRadius:18,padding:"14px 8px",boxShadow:"0 2px 8px rgba(0,0,0,0.06)",textAlign:"center",position:"relative"}}>
+                  <div style={{position:"absolute",top:8,right:10,fontSize:9,color:"#cbd5e1",fontWeight:600}}>TAP ›</div>
+                  <div style={{position:"relative",display:"inline-flex",alignItems:"center",justifyContent:"center",marginBottom:6}}>
+                    <Ring pct={pct(p)} size={56} color={c} strokeW={6}/>
+                    <div style={{position:"absolute",fontSize:11,fontWeight:800,color:c}}>{pct(p)}%</div>
+                  </div>
+                  <div style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:0.5,marginBottom:2}}>{short}</div>
+                  <div style={{fontSize:13,fontWeight:800,color:"#1e293b"}}>{tP(p).filter(t=>t.done).length}<span style={{fontSize:11,color:"#94a3b8",fontWeight:500}}>/{tP(p).length}</span></div>
+                </div>
+              ))}
+            </div>
+
+            {/* Finance KPI — clickable */}
+            <div className="kpi-card" onClick={()=>setModal({type:"finance"})}
+              style={{...CARD,position:"relative",marginBottom:16}}>
+              <div style={{position:"absolute",top:14,right:16,fontSize:9,color:"#cbd5e1",fontWeight:600}}>TAP FOR DETAILS ›</div>
+              <span className="sec-title">Finance Snapshot</span>
+              <div style={{display:"flex",gap:10,marginBottom:12}}>
+                <div style={{flex:1,background:"#ecfdf5",borderRadius:14,padding:"12px"}}>
+                  <div style={{fontSize:10,color:"#10b981",fontWeight:700,marginBottom:3}}>INCOME</div>
+                  <div style={{fontSize:19,fontWeight:800,color:"#065f46"}}>₹{inc.toLocaleString("en-IN")}</div>
+                </div>
+                <div style={{flex:1,background:"#fef2f2",borderRadius:14,padding:"12px"}}>
+                  <div style={{fontSize:10,color:"#ef4444",fontWeight:700,marginBottom:3}}>EXPENSE</div>
+                  <div style={{fontSize:19,fontWeight:800,color:"#991b1b"}}>₹{exp.toLocaleString("en-IN")}</div>
+                </div>
+              </div>
+              <div style={{padding:"12px",background:bal>=0?"#eff6ff":"#fef2f2",borderRadius:14}}>
+                <div style={{fontSize:10,color:bal>=0?"#3b82f6":"#ef4444",fontWeight:700,marginBottom:2}}>BALANCE</div>
+                <div style={{fontSize:21,fontWeight:800,color:bal>=0?"#1d4ed8":"#991b1b"}}>₹{Math.abs(bal).toLocaleString("en-IN")} {bal<0?"↓":"↑"}</div>
+              </div>
+            </div>
+
+            {/* Reminders KPI — clickable */}
+            <div className="kpi-card" onClick={()=>setModal({type:"reminders"})}
+              style={{...CARD,position:"relative",marginBottom:0}}>
+              <div style={{position:"absolute",top:14,right:16,fontSize:9,color:"#cbd5e1",fontWeight:600}}>TAP FOR ALL ›</div>
+              <span className="sec-title">Reminders</span>
+              {overdue.length>0&&<div style={{background:"#fef2f2",borderRadius:12,padding:"10px 12px",marginBottom:10,display:"flex",alignItems:"center",gap:10}}>
+                <span style={{fontSize:18}}>⚠️</span>
+                <div><div style={{fontSize:13,fontWeight:700,color:"#991b1b"}}>{overdue.length} overdue</div>
+                <div style={{fontSize:11,color:"#ef4444"}}>{overdue[0]?.title}</div></div>
+              </div>}
+              {todayRem.slice(0,3).map(r=><div key={r.id} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0",borderBottom:"1px solid #f1f5f9"}}>
+                <span style={{fontSize:16}}>🔔</span>
+                <div style={{flex:1}}>
+                  <div style={{fontWeight:600,fontSize:13,color:"#1e293b"}}>{r.title}</div>
+                  <div style={{fontSize:11,color:"#94a3b8"}}>Today{r.time&&` · ${r.time}`}</div>
+                </div>
+              </div>)}
+              {!overdue.length&&!todayRem.length&&<div style={{fontSize:13,color:"#94a3b8",textAlign:"center",padding:"10px 0"}}>No reminders for today 🎉</div>}
+            </div>
+          </div>}
+
+          {/* DAILY / WEEKLY / MONTHLY detail pages */}
+          {dtab==="daily"&&<div style={CARD}><span className="sec-title" style={{fontSize:13,letterSpacing:0,textTransform:"none",fontWeight:700,color:"#0f172a"}}>Daily Dashboard — Today</span><PeriodDetail data={data} p="Today"/></div>}
+          {dtab==="weekly"&&<div style={CARD}><span className="sec-title" style={{fontSize:13,letterSpacing:0,textTransform:"none",fontWeight:700,color:"#0f172a"}}>Weekly Dashboard — This Week</span><PeriodDetail data={data} p="This Week"/></div>}
+          {dtab==="monthly"&&<div style={CARD}><span className="sec-title" style={{fontSize:13,letterSpacing:0,textTransform:"none",fontWeight:700,color:"#0f172a"}}>Monthly Dashboard — This Month</span><PeriodDetail data={data} p="This Month"/></div>}
+          {dtab==="calendar"&&<CalView data={data}/>}
+        </div>}
+
+        {/* ──── TASKS ──── */}
+        {tab==="tasks"&&<div>
+          {/* Add form */}
+          <div style={CARD}>
+            <div style={{fontSize:14,fontWeight:700,color:"#1e293b",marginBottom:14}}>➕ Add New Task</div>
+            <input value={tTitle} onChange={e=>setTTitle(e.target.value)} placeholder="What do you need to do?"
+              onKeyDown={e=>e.key==="Enter"&&addTask()} style={INP}/>
+            <div style={{display:"flex",gap:8,marginBottom:10}}>
+              <select value={tCat} onChange={e=>setTCat(e.target.value)} style={{...SEL,flex:1}}>{CATS.map(c=><option key={c}>{c}</option>)}</select>
+              <select value={tPeriod} onChange={e=>setTPeriod(e.target.value)} style={{...SEL,flex:1}}>{PERIODS.map(p=><option key={p}>{p}</option>)}</select>
+            </div>
+            <button onClick={addTask} style={BTN}>+ Add Task</button>
+          </div>
+
+          {/* Task list grouped by period */}
+          {PERIODS.map(p=>{
+            const ts=tP(p); if(!ts.length)return null;
+            const doneCount=ts.filter(t=>t.done).length;
+            return <div key={p} style={{marginBottom:20}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
+                <span className="sec-title" style={{marginBottom:0}}>{p}</span>
+                <div style={{display:"flex",alignItems:"center",gap:8}}>
+                  <div style={{height:5,width:80,background:"#e2e8f0",borderRadius:99,overflow:"hidden"}}>
+                    <div style={{height:"100%",width:`${ts.length?doneCount/ts.length*100:0}%`,background:periodColors[p]||"#10b981",borderRadius:99}}/>
+                  </div>
+                  <span style={{fontSize:11,fontWeight:700,color:periodColors[p]||"#10b981"}}>{doneCount}/{ts.length}</span>
+                </div>
+              </div>
+              {ts.map(t=><TaskRow key={t.id} t={t} onToggle={toggleTask} onDelete={deleteTask}/>)}
+            </div>;
+          })}
+          {!data.tasks.length&&<div style={{...CARD,textAlign:"center",color:"#94a3b8",padding:40,fontSize:14}}>No tasks yet. Add one above! 🚀</div>}
+        </div>}
+
+        {/* ──── FINANCE ──── */}
+        {tab==="finance"&&<div>
+          {/* Balance hero */}
+          <div style={{background:"linear-gradient(135deg,#0f172a,#1e3a5f)",borderRadius:20,padding:22,marginBottom:16,color:"#fff"}}>
+            <div style={{fontSize:10,color:"#475569",letterSpacing:2,textTransform:"uppercase",marginBottom:6,fontWeight:700}}>Net Balance</div>
+            <div style={{fontSize:34,fontWeight:800,color:bal>=0?"#34d399":"#f87171",marginBottom:14}}>
+              ₹{Math.abs(bal).toLocaleString("en-IN")}<span style={{fontSize:16,marginLeft:6}}>{bal<0?"↓":"↑"}</span>
+            </div>
+            <div style={{display:"flex",gap:16}}>
+              <div style={{background:"rgba(52,211,153,0.12)",borderRadius:12,padding:"10px 14px",flex:1}}>
+                <div style={{fontSize:9,color:"#34d399",fontWeight:700,letterSpacing:1,marginBottom:3}}>INCOME</div>
+                <div style={{fontSize:16,fontWeight:800,color:"#34d399"}}>₹{inc.toLocaleString("en-IN")}</div>
+              </div>
+              <div style={{background:"rgba(248,113,113,0.12)",borderRadius:12,padding:"10px 14px",flex:1}}>
+                <div style={{fontSize:9,color:"#f87171",fontWeight:700,letterSpacing:1,marginBottom:3}}>EXPENSE</div>
+                <div style={{fontSize:16,fontWeight:800,color:"#f87171"}}>₹{exp.toLocaleString("en-IN")}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Add entry form */}
+          <div style={CARD}>
+            <div style={{fontSize:14,fontWeight:700,color:"#1e293b",marginBottom:14}}>➕ Add Entry</div>
+            <input value={fDesc} onChange={e=>setFDesc(e.target.value)} placeholder="Description" style={INP}/>
+            <div style={{display:"flex",gap:8,marginBottom:10}}>
+              <input value={fAmt} onChange={e=>setFAmt(e.target.value)} placeholder="Amount (₹)" type="number"
+                style={{...INP,flex:2,marginBottom:0}}/>
+              <select value={fType} onChange={e=>setFType(e.target.value)} style={{...SEL,flex:1}}>
+                <option value="income">Income</option><option value="expense">Expense</option>
+              </select>
+            </div>
+            <div style={{marginTop:10}}><button onClick={addFin} style={BTN}>+ Add Entry</button></div>
+          </div>
+
+          {/* Transaction list */}
+          <span className="sec-title">All Transactions</span>
+          {[...data.finances].reverse().map(f=><FinRow key={f.id} f={f} onDelete={delFin}/>)}
+          {!data.finances.length&&<div style={{...CARD,textAlign:"center",color:"#94a3b8",padding:40,fontSize:14}}>No entries yet 💰</div>}
+        </div>}
+
+        {/* ──── REMINDERS ──── */}
+        {tab==="reminders"&&<div>
+          {/* Add reminder form */}
+          <div style={CARD}>
+            <div style={{fontSize:14,fontWeight:700,color:"#1e293b",marginBottom:14}}>🔔 Set a Reminder</div>
+            <input value={rTitle} onChange={e=>setRTitle(e.target.value)} placeholder="What to remind you about?" style={INP}/>
+            <div style={{display:"flex",gap:8,marginBottom:10}}>
+              <input type="date" value={rDate} onChange={e=>setRDate(e.target.value)}
+                style={{...INP,flex:1,marginBottom:0}}/>
+              <input type="time" value={rTime} onChange={e=>setRTime(e.target.value)}
+                style={{...INP,flex:1,marginBottom:0}}/>
+            </div>
+            <div style={{marginTop:10}}><button onClick={addRem} style={BTN}>🔔 Set Reminder</button></div>
+          </div>
+
+          {overdue.length>0&&<div style={{marginBottom:16}}>
+            <span className="sec-title" style={{color:"#ef4444"}}>⚠️ Overdue ({overdue.length})</span>
+            {overdue.map(r=><RemRow key={r.id} r={r} onToggle={togRem} onDelete={delRem}/>)}
+          </div>}
+          {todayRem.length>0&&<div style={{marginBottom:16}}>
+            <span className="sec-title">Today ({todayRem.length})</span>
+            {todayRem.map(r=><RemRow key={r.id} r={r} onToggle={togRem} onDelete={delRem}/>)}
+          </div>}
+          {upcoming.filter(r=>r.date>tStr).length>0&&<div style={{marginBottom:16}}>
+            <span className="sec-title">Upcoming</span>
+            {upcoming.filter(r=>r.date>tStr).map(r=><RemRow key={r.id} r={r} onToggle={togRem} onDelete={delRem}/>)}
+          </div>}
+          {data.reminders.filter(r=>r.done).length>0&&<div style={{marginBottom:16}}>
+            <span className="sec-title">Completed</span>
+            {data.reminders.filter(r=>r.done).map(r=><RemRow key={r.id} r={r} onToggle={togRem} onDelete={delRem}/>)}
+          </div>}
+          {!data.reminders.length&&<div style={{...CARD,textAlign:"center",color:"#94a3b8",padding:40,fontSize:14}}>No reminders yet ⏰</div>}
+        </div>}
+
+      </div>
+    </div>;
+  }
+
+  ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
